@@ -16,6 +16,7 @@ $login = "";
 $nascimento = "";
 $senha = "";
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {       //  variaveis = POST ?? se o post não existir o valor será "" branco
     $nome = $_POST["nome"] ?? "";
     $email = $_POST["email"] ?? "";
