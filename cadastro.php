@@ -67,7 +67,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {       //  variaveis = POST ?? se o 
             <h3 class="p-3 fw-bold">Cadastro de usuário</h3>
         </div>
         <?php
-        
+        // != significa diferente
+        if ($mensagem != "") {
+            echo ("<div class='alert alert-primary' role='alert'>
+            ' . $mensagem . '
+          </div>");
+        }
+        if ($erro != "") {
+            echo ("
+            <div class='alert alert-danger' role='alert'>
+            $erro
+          </div>
+        ");
+        }
+
         ?>
 
         <!-- formulário de cadastro -->
