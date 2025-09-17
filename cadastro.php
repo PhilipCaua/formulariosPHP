@@ -7,6 +7,15 @@ include_once("./db/conexao.php");
 // $_GET = variaveis de envio de formulário GET 
 // $_SESSION = variaveis de sessão 
 $erro = "";
+$mensagem = "";
+// valores das variaveis dos campos do formularios (inputs)
+$id = ""; // id do usuário
+$nome = "";
+$email = "";
+$login = "";
+$nascimento = "";
+$senha = "";
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {       //  variaveis = POST ?? se o post não existir o valor será "" branco
     $nome = $_POST["nome"] ?? "";
     $email = $_POST["email"] ?? "";
@@ -15,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {       //  variaveis = POST ?? se o 
     $senha = $_POST["senha"] ?? "";
     // echo("$nome - $email - $senha - $nascimento - $login");
     if (strlen($nome) < 6) {
-        $erro .= "Informe o nome com pelo menos 6 caracteres";
+        $erro .= "Informe o nome com pelo menos 6 caracteres"; // concatenação de erro
     }
     $sql = "INSERT INTO usuarios (nome, email, login, nascimento, senha) 
     VALUES (?, ?, ?, ?, ?)"; // Esse comando serve para inserir dados na tabela usuarios 
@@ -28,8 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {       //  variaveis = POST ?? se o 
         $nascimento,
         $senha
     ); // vincula os parametros do comando sql com as variaveis php
-    $stmt->execute(); // executa o comando sql
-
+    // tratamento de erro 
+    if ($stmt->execute() === TRUE) { // executa o comando sql
+        $id = $stmt->insert_id; // pega o id do ultimo registro inserido
+        $mensagem = "Usuário cadastrado com sucesso";
+    } else {
+        $erro .= "Erro ao cadastrar o usuário: " . $stmt->error;  // concatenação de erro
+    }
 }
 
 
@@ -52,19 +66,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {       //  variaveis = POST ?? se o 
         <div class="card shadow bg-body-tertiary">
             <h3 class="p-3 fw-bold">Cadastro de usuário</h3>
         </div>
+        <?php
+        
+        ?>
+
         <!-- formulário de cadastro -->
         <div class="card shadow bg bg-body-tertiary my-3">
             <div class="card-body">
                 <form method="post">
+                    <!-- Mostra o ID do Usuário -->
+                    <div class="mb-3">
+                        <label class="form-label"> ID do Usuário</label>
+                        <input type="text" class="form-control" readonly
+                            id="codigo" name="codigo" value="<?php echo ($id); ?>">
+
+                    </div>
                     <div class="mb-3">
                         <!-- tag atributo = valor -->
                         <label class="form-label">Informe seu nome</label>
-                        <input type="text" class="form-control" id="nome" name="nome" required minlength="6" maxlength="200">
+                        <input type="text" class="form-control"
+                            id="nome" name="nome" value="<?php echo ($nome); ?>"
+                            required minlength="6" maxlength="200">
+
                     </div>
                     <!-- email -->
                     <div class="mb-3">
                         <label for="email" class="form-label">email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
+                        <input type="email" class="form-control"
+                            id="email" name="email" value="<?php echo ($email); ?>"
+                            required minlength="5" maxlength="100">
+
                         <div class="invalid-feedback">
                             Informe um email valido
                         </div>
@@ -72,7 +103,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {       //  variaveis = POST ?? se o 
                     <!-- login -->
                     <div class="mb-3">
                         <label for="login" class="form-label">Login</label>
-                        <input type="text" class="form-control" id="login" name="login" required>
+                        <input type="text" class="form-control"
+                            id="login" name="login" value="<?php echo ($login); ?>"
+                            required minlength="5" maxlength="20">
+
                         <div class="invalid-feedback">
                             Informe um login
                         </div>
@@ -80,7 +114,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {       //  variaveis = POST ?? se o 
                     <!-- Data Nasc -->
                     <div class="mb-3">
                         <label for="nascimento" class="form-label">Data Nascimento</label>
-                        <input type="date" class="form-control" id="nascimento" name="nascimento" required>
+                        <input type="date" class="form-control"
+                            id="nascimento" name="nascimento" value="<?php echo ($nascimento); ?>"
+                            min="1920-01-01" max="2020-01-01" required>
+
                         <div class="invalid-feedback">
                             Informe a data de nascimento
                         </div>
