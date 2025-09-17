@@ -16,7 +16,35 @@ $login = "";
 $nascimento = "";
 $senha = "";
 
+// verificar se tem um id no GUEST, se tiver buscar os dados do usuário
+// verifica se um variavel existe	
+if (isset($_GET["id"])) { // se existir o id no get
+    $id = $_GET["id"]; // pega o id do get
+    // verificar se o ID é numérico 
+    if (!is_numeric($id)) {
+        $erro = "ID inválido";
+    } else {
 
+        //Buscar dados do usuário no banco de dados 
+        //Instrução SQL SELECT = selecionar dados de uma tabela
+        // Tabela usuarios onde (WHERE) o id é igual ao id do GET
+        $sql = "SELECT * FROM usuarios WHERE usuario_id = ?";
+        $stmt = $conexao->prepare($sql); //Comando para iniciar um consulta
+        $stmt->bind_param("i", $id); // vincula o parametro do comando sql com a variavel php (i = inteiro)
+        $stmt->execute(); // executa o comando sql
+        $resultado = $stmt->get_result(); // pega o resultado da consulta
+        // verifica se encontrou o usuário
+        if ($resultado->num_rows == 1) {
+            $linha = $resultado->fetch_object(); // pega os dados do usuário
+            $nome = $linha->nome;
+            $email = $linha->email;
+            $login = $linha->login;
+            $nascimento = $linha->nascimento;
+        } else {
+            $erro = "Usuário não encontrado";
+        }
+    }
+}
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {       //  variaveis = POST ?? se o post não existir o valor será "" branco
     $nome = $_POST["nome"] ?? "";
     $email = $_POST["email"] ?? "";
