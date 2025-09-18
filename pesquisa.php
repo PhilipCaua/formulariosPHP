@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sistema de Cadastro - Usuários </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -39,31 +40,69 @@
     <main>
         <div class="container my-5">
             <!-- barra de título -->
-            <div class="card shadow db body-tertiary my-4">
+            <div class="card shadow bg-body-tertiary my-4">
                 <h3 class="p-3 fw-bold">Lista de Usuários</h3>
 
             </div>
             <!-- resultado da pesuisa  -->
             <div class="card shadow my-4">
-                <div class="card=body">
+                <div class="card-body">
+
                     <!-- Area de pesquisa e de novo  -->
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-4 col">
                             <div class="input-group ">
                                 <input class="form-control border-end-0" type="text"
                                     id="pesquisa" name="pesquisa"
                                     placeholder="Pesquisa nome ou e-mail">
-                                <button class="input-group-text bg-white " Type=" button">
-                                    p
+                                <button class="input-group-text bg-white " type=" button">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
                                 </button>
                             </div>
                         </div>
-                        <div class="col-md-8 text-end">
+                        <div class="col-md-8 col-auto text-end">
                             <a href="cadastro.php" class="btn btn-primary">
-                                +Novo Usuário
+                                <i class="fa-solid fa-circle-plus"></i>
+                                <span class="d-md-inline d-none">Novo Usuário</span>
+
                             </a>
 
                         </div>
+                        <div class="col-12 py-3">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">First</th>
+                                        <th scope="col">Last</th>
+                                        <th scope="col">Handle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>@fat</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>John</td>
+                                        <td>Doe</td>
+                                        <td>@social</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+
+
                     </div>
                     <!-- fim do row -->
                 </div>
