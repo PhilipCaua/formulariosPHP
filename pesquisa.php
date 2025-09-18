@@ -49,7 +49,7 @@
                     <!-- Area de pesquisa e de novo  -->
                     <div class="row">
                         <div class="col-md-4">
-                            <div class="input-group mb-3">
+                            <div class="input-group ">
                                 <input class="form-control border-end-0" type="text"
                                     id="pesquisa" name="pesquisa"
                                     placeholder="Pesquisa nome ou e-mail">
