@@ -55,7 +55,7 @@
                                 <input class="form-control border-end-0" type="text"
                                     id="pesquisa" name="pesquisa"
                                     placeholder="Pesquisa nome ou e-mail">
-                                <button class="input-group-text bg-white " type=" button">
+                                <button class="input-group-text bg-white" type="button">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </button>
                             </div>
@@ -68,14 +68,17 @@
                             </a>
 
                         </div>
-                        <div class="col-12 py-3">
+                        <div class="col-12 py-3 table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">Login</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Dt.Nasc.</th>
+                                        <th scope="col">Ações</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -84,18 +87,19 @@
                                         <td>Mark</td>
                                         <td>Otto</td>
                                         <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>John</td>
-                                        <td>Doe</td>
-                                        <td>@social</td>
+                                        <td>01/01/2020</td>
+                                        <td>
+                                            <a href="cadastro.php?id=16"
+                                                class="btn btn-primary btn-sm">
+                                                <span data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="alterar usuário">
+                                                </span>
+                                                <i class="fa-solid fa-pen-to-square"></i> </a>
+                                            <button class="btn btn-danger btn-sm">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </td>
+
+
                                     </tr>
                                 </tbody>
                             </table>
@@ -111,6 +115,10 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    </script>
 </body>
 
 </html>
