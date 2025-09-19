@@ -1,3 +1,17 @@
+<?php
+// Conexão com o banco de dados
+include_once("./db/conexao.php");
+// SQl para selecionar todos os usuários
+$sql = "SELECT * FROM usuarios ORDER BY nome ASC";
+// Executar o comando sql
+$resultado = $conexao->query($sql);
+// verificar quantas linhas foram retornadas
+$num_linhas = $resultado->num_rows;
+
+
+
+?>
+
 <!doctype html>
 <html lang="pt-br">
 
@@ -82,25 +96,32 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>01/01/2020</td>
-                                        <td>
-                                            <a href="cadastro.php?id=16"
-                                                class="btn btn-primary btn-sm">
-                                                <span data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="alterar usuário">
-                                                </span>
-                                                <i class="fa-solid fa-pen-to-square"></i> </a>
-                                            <button class="btn btn-danger btn-sm">
-                                                <i class="fa-solid fa-trash"></i>
-                                            </button>
-                                        </td>
+                                    <?php
+                                    $contador = 0;
+                                    while ($linha = $resultado->fetch_object()) {
+                                        $contador++;
+                                    ?>
+                                        <tr>
+                                            <th scope="row"><?= $contador ?></th>
+                                            <td><?= $linha->nome ?></td>
+                                            <td><?= $linha->login ?></td>
+                                            <td><?= $linha->email ?></td>
+                                            <td><?= $linha->nascimento ?></td>
+                                            <td>
+                                                <a href="cadastro.php?id=<?= $linha->id ?>"
+                                                    class="btn btn-primary btn-sm">
+                                                    <span data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="alterar usuário">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </span>
+                                                </a>
+                                                <button class="btn btn-danger btn-sm">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </td>
 
 
-                                    </tr>
+                                        </tr>
+                                    <?php } ?>
                                 </tbody>
                             </table>
 
